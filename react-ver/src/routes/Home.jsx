@@ -1,19 +1,25 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 export function Home() {
     const [totalVisits, setTotalVisits] = useState(0)
+
+    const projectId = import.meta.env.VITE_VERCEL_PROJECT_ID
+    const token = import.meta.env.VITE_VERCEL_TOKEN
+
+    console.log('Token:',token)
+    console.log('Project ID:', projectId)
 
     useEffect(() => {
             async function handleVisits() {
                 try{
                     axios.get("https://api.vercel.com/v1/query/web-analytics/visits/count", {
                         headers: {
-                            Authorization: `Bearer ${import.meta.env.VERCEL_TOKEN}`,
+                            Authorization: `Bearer ${token}`,
                         },
                         params: {
-                            projectId: import.meta.env.VERCEL_PROJECT_ID,
-                            filter: "requestPath eq '/experience'"
+                            projectId: projectId,
                         }
                     }).then(res => {
                         console.log('API Response | Home page:', res.data)
@@ -41,7 +47,7 @@ export function Home() {
             
             <h1 className="text-2xl font-bold text-zinc-50">Website Analytics using React</h1>
 
-            <p>Total Visitors: {totalVisits}</p>
+            <p>Total Visitors: {totalVisits || 0}</p>
         </main>
     )
 }
