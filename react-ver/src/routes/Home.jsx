@@ -8,9 +8,6 @@ export function Home() {
     const projectId = import.meta.env.VITE_VERCEL_PROJECT_ID
     const token = import.meta.env.VITE_VERCEL_TOKEN
 
-    console.log('Token:',token)
-    console.log('Project ID:', projectId)
-
     useEffect(() => {
             async function handleVisits() {
                 try{
