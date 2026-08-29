@@ -3,27 +3,34 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 export function Home() {
-    const [totalVisits, setTotalVisits] = useState(0)
+    const [loader, setLoader] = useState(false)
+    const [data, setData] = useState({})
 
     const projectId = import.meta.env.VITE_VERCEL_PROJECT_ID
     const token = import.meta.env.VITE_VERCEL_TOKEN
 
     useEffect(() => {
             async function handleVisits() {
+                setLoader(true)
                 try{
-                    axios.get("https://api.vercel.com/v1/query/web-analytics/visits/count", {
+                    const res = await axios.get(
+                        `https://api.vercel.com/v1/query/web-analytics/visits/count`, {
                         headers: {
-                            Authorization: `Bearer ${token}`,
+                            Authorization: `Bearer ${token}`
                         },
                         params: {
                             projectId: projectId,
                         }
-                    }).then(res => {
-                        console.log('API Response | Home page:', res.data)
-                        setTotalVisits(res.data.visitors)
                     })
+
+                    setData(res.data.data)
                 } catch (error) {
-                    console.error("Failed to fetch visits:", error)
+                    console.error("Vercel Analytics error:", error);
+                    setData(
+                        { visitors: 0, pageviews: 0 }
+                    )
+                } finally {
+                    setLoader(false)
                 }
             }
             handleVisits()
@@ -44,7 +51,10 @@ export function Home() {
             
             <h1 className="text-2xl font-bold text-zinc-50">Website Analytics using React</h1>
 
-            <p>Total Visitors: {totalVisits || 0}</p>
+            <p className="font-mono">Total Visitors: 
+                { data?.visitors == null || loader ? 'Loading...' : data?.visitors}</p>
+            <p className="font-mono">Page Views: 
+                { data?.pageviews == null || loader ? 'Loading...' : data?.pageviews}</p>
         </main>
     )
 }
