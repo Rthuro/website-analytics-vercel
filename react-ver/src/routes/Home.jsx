@@ -9,7 +9,7 @@ export function Home() {
     // frontend-exposed Vite variables must start with VITE_
 
     const projectId = import.meta.env.VITE_VERCEL_PROJECT_ID 
-    const token = import.meta.env.VITE_VERCEL_TOKEN // Only for demo, do not put this in the frontend as Vite bundle and can expose your API token, use it on the backend using express instead
+    const token = import.meta.env.VITE_VERCEL_TOKEN // Only for demo, do not put this in the frontend as Vite bundles it and can expose your API token, use it on the backend instead
 
     useEffect(() => {
             async function handleVisits() {
