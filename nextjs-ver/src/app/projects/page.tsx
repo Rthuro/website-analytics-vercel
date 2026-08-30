@@ -10,7 +10,7 @@ export default function Projects() {
     async function handleVisits() {
       setLoader(true)
       try {
-        const res = await fetch('/api/analytics')
+        const res = await fetch('/api/analytics?page=projects')
         const data = await res.json()
         setVisits(data.visitors)
       } catch (error) {
