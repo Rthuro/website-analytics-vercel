@@ -10,7 +10,7 @@ export default function Experiences() {
     async function handleVisits() {
       setLoader(true)
       try {
-        const res = await fetch('/api/analytics?path=experiences')
+        const res = await fetch('/api/analytics?page=experiences')
         const data = await res.json()
         setVisits(data.visitors)
       } catch (error) {
