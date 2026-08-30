@@ -7,13 +7,21 @@ export async function GET(request: NextRequest) {
         const { searchParams } = new URL(request.url)
 
         // Optional - Filter by page
-        const page = searchParams.get("page")
+        const filter = searchParams.get("filter")
 
         const projectId = process.env.VERCEL_PROJECT_ID
         const token = process.env.VERCEL_TOKEN
 
+        const params = new URLSearchParams({
+            projectId: projectId as string
+        })
+
+        if (filter) {
+            params.set("filter", `requestPath eq '/${filter}'`)
+        }
+
         const res = await fetch(
-            `https://api.vercel.com/v1/query/web-analytics/visits/count?projectId=${projectId}${page ? `&filter=requestPath eq '/${page}'` : ''}`,
+            `https://api.vercel.com/v1/query/web-analytics/visits/count?${params}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`

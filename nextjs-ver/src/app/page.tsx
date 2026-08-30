@@ -2,20 +2,18 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-interface HomeProps {
-  visitors: number;
-  pageviews: number;
-}
-
 export default function Home() {
   const [loader, setLoader] = useState(false)
-  const [data, setData] = useState<HomeProps>({ visitors: 0, pageviews: 0 })
+  const [data, setData] = useState({
+    visitors: 0,
+    pageviews: 0
+  });
 
   useEffect(() => {
     async function handleVisits() {
       setLoader(true)
       try {
-        const res = await fetch('/api/analytics?path=experiences')
+        const res = await fetch('/api/analytics')
         const data = await res.json()
         setData(data)
       } catch (error) {

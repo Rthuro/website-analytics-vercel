@@ -3,14 +3,14 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 export default function Experiences() {
-    const [visits, setVisits] = useState<number | null>(null)
+    const [visits, setVisits] = useState(0)
     const [loader, setLoader] = useState(false)
 
     useEffect(() => {
     async function handleVisits() {
       setLoader(true)
       try {
-        const res = await fetch('/api/analytics?page=experiences')
+        const res = await fetch('/api/analytics?filter=experiences')
         const data = await res.json()
         setVisits(data.visitors)
       } catch (error) {
@@ -33,7 +33,7 @@ export default function Experiences() {
 
             <h1 className="text-2xl font-bold text-zinc-50">Experiences</h1>
 
-            <p className="font-mono">Total page visitor count: { visits == null || loader ? 'Loading...' : visits}</p>
+            <p className="font-mono">Total page visitor count: { loader ? 'Loading...' : visits}</p>
         </main>
     )
 }
