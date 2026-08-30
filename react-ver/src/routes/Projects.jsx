@@ -23,7 +23,7 @@ export function Projects() {
                         filter: "requestPath eq '/projects'"
                     }
                 }).then(res => {
-                    setVisits(res.data.data.visitors)
+                    setVisits(res.data.data.pageviews)
                 })
             } catch (error) {
                 setVisits(0)

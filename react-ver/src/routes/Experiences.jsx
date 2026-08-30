@@ -23,7 +23,7 @@ export function Experiences() {
                         filter: "requestPath eq '/experience'"
                     }
                 }).then(res => {
-                    setVisits(res.data.data.visitors)
+                    setVisits(res.data.data.pageviews)
                 })
             } catch (error) {
                 console.error("Vercel Analytics error:", error);
