@@ -12,7 +12,7 @@ export default function Projects() {
       try {
         const res = await fetch('/api/analytics?filter=projects')
         const data = await res.json()
-        setVisits(data.visitors)
+        setVisits(data.pageviews)
       } catch (error) {
         console.error("Vercel Analytics error:", error)
         setVisits(0)

@@ -12,7 +12,7 @@ export default function Experiences() {
       try {
         const res = await fetch('/api/analytics?filter=experiences')
         const data = await res.json()
-        setVisits(data.visitors)
+        setVisits(data.pageviews)
       } catch (error) {
         console.error("Vercel Analytics error:", error)
         setVisits(0)
