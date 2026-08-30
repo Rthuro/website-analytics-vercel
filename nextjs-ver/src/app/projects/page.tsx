@@ -33,7 +33,7 @@ export default function Projects() {
 
             <h1 className="text-2xl font-bold text-zinc-50">Projects</h1>
 
-            <p className="font-mono">Total page visitor count: { loader ? 'Loading...' : visits}</p>
+            <p className="font-mono">Total page views count: { loader ? 'Loading...' : visits}</p>
         </main>
     )
 }

@@ -8,7 +8,7 @@ export function Projects() {
     const navigate = useNavigate()
 
     const projectId = import.meta.env.VITE_VERCEL_PROJECT_ID
-    const token = import.meta.env.VITE_VERCEL_TOKEN
+    const token = import.meta.env.VITE_VERCEL_TOKEN // Only for demo, do not put this in the frontend as Vite bundles it and can expose your API token, use it on the backend instead
 
     useEffect(() => {
         async function handleVisits() {
@@ -43,7 +43,7 @@ export function Projects() {
 
             <h1 className="text-2xl font-bold text-zinc-50">Projects</h1>
 
-            <p className="font-mono">Total page visitor count: { visits == null || loader ? 'Loading...' : visits}</p>
+            <p className="font-mono">Total page views count: { visits == null || loader ? 'Loading...' : visits}</p>
         </main>
     )
 }
