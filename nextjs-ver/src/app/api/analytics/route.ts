@@ -27,9 +27,9 @@ export async function GET(request: NextRequest) {
                     Authorization: `Bearer ${token}`
                 }
             }
-        )
+        );
 
-        const data = await res.json()
+        const data = await res.json();
 
         return new Response(JSON.stringify(data.data), {
             headers: {
